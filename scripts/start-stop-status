@@ -1,0 +1,34 @@
+#!/bin/sh
+
+case $1 in
+	start)
+		### Start this package.
+		synoshare --add AppleDevice "for iPhone/iPad" /volume1/AppleDevice "" "" "@users" 1 0
+		touch /volume1/AppleDevice/Please-Connect-to-Your-Device-First
+		usbmuxd
+		udevadm control --reload-rules
+		exit 0
+	;;
+	stop)
+		### Stop this package.
+		umount /volume1/AppleDevice
+		synoshare --del FALSE AppleDevice
+		killall usbmuxd
+		udevadm control --reload-rules
+		exit 0
+	;;
+	status)
+		### Check package alive.
+		if [ -h "/usr/sbin/usbmuxd" ]; then
+			exit 0
+		else
+			exit 1
+		fi
+	;;
+	killall)
+        ;;
+	log)
+		exit 0
+	;;
+esac
+
