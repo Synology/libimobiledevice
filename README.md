@@ -13,21 +13,48 @@ with OpenSSL and being repacked into a NAS package.
 * Docker (libimobiledevice is built inner a container.)
 * Synology Open Source Toolkit (for repacking them into a NAS package)
 
-## Preparation
+## How to Build
+
+### Preparation
 `$ mkdir /toolkit`
+
 `$ cd /toolkit && git clone https://github.com/SynologyOpenSource/pkgscripts-ng`
+
 `$ cd /toolkit/pkgscripts-ng && ./EnvDeploy -v 6.1 -p x64`
 
-## Clone This Project
+### Clone This Project
 `$ mkdir -p /toolkit/source`
+
 `$ cd /toolkit/source && git clone https://github.com/bxxxjxxg/libimobiledevice`
 
-## Compile inner a docker container
+### Compile inner a docker container
 `$ cd /toolkit/source/libimobiledevice && ./build.sh`
 
-## Build NAS package (without CodeSign)
+### Build NAS package (without CodeSign)
 `$ /toolkit/pkgscripts-ng/PkgCreate.py -v 6.1 -p x64 -S libimobiledevice`
+
 // Output Folder: /toolkit/result_spk/
+
+After installation, idevice*, ifuse, usbmuxd are available in command-line.
+
+## Mounting
+This package will start the usbmuxd daemon as default. If it's not started,
+you can start it manually:
+
+`$ usbmuxd` // background mode
+
+`$ usbmuxd -f -v` //foreground verbose mode
+
+Plug-in your iPhone or iPad, and then enter the passcode to allow the
+access permission.
+
+Next, you can mount your Apple Device in user space:
+
+`$ ifuse /mnt`
+
+For unmounting,
+
+`$ fusemount -u /mnt`
 
 ## Reference
 * How to Build Guide
