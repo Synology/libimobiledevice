@@ -3,8 +3,8 @@
 source /pkgscripts/include/pkg_util.sh
 
 package="libimobiledevice"
-version="1.0.0001"
-os_min_ver="6.1.3-15152"
+version="1.0.0003"
+firmware="6.1-15152"
 displayname="libimobiledevice"
 maintainer="libimobiledevice"
 maintainer_url="http://www.libimobiledevice.org"
