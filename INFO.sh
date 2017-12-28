@@ -3,7 +3,7 @@
 source /pkgscripts/include/pkg_util.sh
 
 package="libimobiledevice"
-version="1.0.0003"
+version="1.0.0004"
 firmware="6.1-15152"
 displayname="libimobiledevice"
 maintainer="libimobiledevice"

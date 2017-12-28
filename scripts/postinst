@@ -1,46 +1,8 @@
 #!/bin/sh
 
-# lib
-ln -sf $SYNOPKG_PKGDEST/lib/libimobiledevice.a /usr/lib/
-ln -sf $SYNOPKG_PKGDEST/lib/libimobiledevice.so /usr/lib/
-ln -sf $SYNOPKG_PKGDEST/lib/libimobiledevice.so.6.0.0 /usr/lib/
-ln -sf $SYNOPKG_PKGDEST/lib/libusbmuxd.la /usr/lib/
-ln -sf $SYNOPKG_PKGDEST/lib/libusbmuxd.so.4 /usr/lib/
-ln -sf $SYNOPKG_PKGDEST/lib/libimobiledevice.la /usr/lib/
-ln -sf $SYNOPKG_PKGDEST/lib/libimobiledevice.so.6 /usr/lib/
-ln -sf $SYNOPKG_PKGDEST/lib/libusbmuxd.a /usr/lib/
-ln -sf $SYNOPKG_PKGDEST/lib/libusbmuxd.so /usr/lib/
-ln -sf $SYNOPKG_PKGDEST/lib/libusbmuxd.so.4.0.0 /usr/lib/
-ln -sf $SYNOPKG_PKGDEST/lib/libusb-1.0.so.0.1.0 /usr/lib/
-ln -sf $SYNOPKG_PKGDEST/lib/libudev.so.1.6.4 /usr/lib/
-ln -sf /usr/lib/libusb-1.0.so.0.1.0 /usr/lib/libusb-1.0.so.0
-ln -sf /usr/lib/libudev.so.1.6.4 /usr/lib/libudev.so.1
-
-# bin
-ln -sf $SYNOPKG_PKGDEST/bin/idevicebackup /usr/bin/
-ln -sf $SYNOPKG_PKGDEST/bin/idevicedebug /usr/bin/
-ln -sf $SYNOPKG_PKGDEST/bin/idevice_id /usr/bin/
-ln -sf $SYNOPKG_PKGDEST/bin/idevicenotificationproxy /usr/bin/
-ln -sf $SYNOPKG_PKGDEST/bin/idevicesyslog /usr/bin/
-ln -sf $SYNOPKG_PKGDEST/bin/idevicebackup2 /usr/bin/
-ln -sf $SYNOPKG_PKGDEST/bin/idevicedebugserverproxy /usr/bin/
-ln -sf $SYNOPKG_PKGDEST/bin/ideviceimagemounter /usr/bin/
-ln -sf $SYNOPKG_PKGDEST/bin/idevicepair /usr/bin/
-ln -sf $SYNOPKG_PKGDEST/bin/ifuse /usr/bin/
-ln -sf $SYNOPKG_PKGDEST/bin/idevicecrashreport /usr/bin/
-ln -sf $SYNOPKG_PKGDEST/bin/idevicediagnostics /usr/bin/
-ln -sf $SYNOPKG_PKGDEST/bin/ideviceinfo /usr/bin/
-ln -sf $SYNOPKG_PKGDEST/bin/ideviceprovision /usr/bin/
-ln -sf $SYNOPKG_PKGDEST/bin/iproxy /usr/bin/
-ln -sf $SYNOPKG_PKGDEST/bin/idevicedate /usr/bin/
-ln -sf $SYNOPKG_PKGDEST/bin/ideviceenterrecovery /usr/bin/
-ln -sf $SYNOPKG_PKGDEST/bin/idevicename /usr/bin/
-ln -sf $SYNOPKG_PKGDEST/bin/idevicescreenshot /usr/bin/
-
-# sbin
-ln -sf $SYNOPKG_PKGDEST/sbin/usbmuxd /usr/sbin/
-
-# udev
-cp $SYNOPKG_PKGDEST/39-libimobiledevice.rules /usr/lib/udev/rules.d/
+python -c "\
+	data = open('$SYNOPKG_PKGDEST/mounting.sh').read(); \
+	data = data.replace('volume1', '$SYNOPKG_PKGDEST_VOL'); \
+	open('$SYNOPKG_PKGDEST/mounting.sh', 'w').write(data)"
 
 exit 0

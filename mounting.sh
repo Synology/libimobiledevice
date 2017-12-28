@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
+
 umount /volume1/AppleDevice
 sleep 3;
 

@@ -1,20 +1,29 @@
 #!/bin/sh
 
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
+
 case $1 in
 	start)
 		### Start this package.
+		ln -sf /usr/local/lib/libusb-1.0.so.0.1.0 /usr/lib/libusb-1.0.so.0
+		ln -sf /usr/local/lib/libudev.so.1.6.4 /usr/lib/libudev.so.1
+		ln -sf $SYNOPKG_PKGDEST/sbin/usbmuxd /usr/sbin/
 		synoshare --add AppleDevice "for iPhone/iPad" /volume1/AppleDevice "" "" "@users" 1 0
-		touch /volume1/AppleDevice/Please-Connect-to-Your-Device-First
+		touch $SYNOPKG_PKGDEST_VOL/AppleDevice/Please-Connect-to-Your-Device-First
 		usbmuxd
+		cp $SYNOPKG_PKGDEST/39-libimobiledevice.rules /usr/lib/udev/rules.d/
 		udevadm control --reload-rules
 		exit 0
 	;;
 	stop)
 		### Stop this package.
-		umount /volume1/AppleDevice
+		umount $SYNOPKG_PKGDEST_VOL/AppleDevice
 		synoshare --del FALSE AppleDevice
 		killall usbmuxd
 		udevadm control --reload-rules
+		rm -f /usr/lib/libusb-1.0.so.0
+		rm -f /usr/lib/libudev.so.1
+		rm -f /usr/sbin/usbmuxd
 		exit 0
 	;;
 	status)
