@@ -1,0 +1,6 @@
+{
+	"usr-local-linker": {
+  		"bin": ["bin/idevice_id", "bin/idevicedate", "bin/ideviceenterrecovery", "bin/idevicenotificationproxy", "bin/idevicesyslog", "bin/idevicebackup", "bin/idevicedebug", "bin/ideviceimagemounter", "bin/idevicepair", "bin/ifuse", "bin/idevicebackup2", "bin/idevicedebugserverproxy", "bin/ideviceinfo", "bin/ideviceprovision", "bin/iproxy", "bin/idevicecrashreport", "bin/idevicediagnostics", "bin/idevicename", "bin/idevicescreenshot"],
+  		"lib": ["lib/libimobiledevice.a", "lib/libimobiledevice.so.6", "lib/libusb-1.0.so.0.1.0", "lib/libusbmuxd.so", "lib/libimobiledevice.la", "lib/libimobiledevice.so.6.0.0", "lib/libusbmuxd.a", "lib/libusbmuxd.so.4", "lib/libimobiledevice.so", "lib/libudev.so.1.6.4", "lib/libusbmuxd.la", "lib/libusbmuxd.so.4.0.0"]
+	}
+}

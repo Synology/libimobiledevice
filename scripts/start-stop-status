@@ -5,10 +5,8 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
 case $1 in
 	start)
 		### Start this package.
-		ln -sf /usr/local/lib/libusb-1.0.so.0.1.0 /usr/lib/libusb-1.0.so.0
-		ln -sf /usr/local/lib/libudev.so.1.6.4 /usr/lib/libudev.so.1
-		ln -sf $SYNOPKG_PKGDEST/sbin/usbmuxd /usr/sbin/
-		synoshare --add AppleDevice "for iPhone/iPad" /volume1/AppleDevice "" "" "@users" 1 0
+		ln -sf $SYNOPKG_PKGDEST/sbin/usbmuxd /usr/local/sbin/
+		synoshare --add AppleDevice "for iPhone/iPad" /$SYNOPKG_PKGDEST_VOL/AppleDevice "" "" "@users" 1 0
 		touch $SYNOPKG_PKGDEST_VOL/AppleDevice/Please-Connect-to-Your-Device-First
 		usbmuxd
 		cp $SYNOPKG_PKGDEST/39-libimobiledevice.rules /usr/lib/udev/rules.d/
@@ -20,15 +18,14 @@ case $1 in
 		umount $SYNOPKG_PKGDEST_VOL/AppleDevice
 		synoshare --del FALSE AppleDevice
 		killall usbmuxd
+		rm -f /usr/lib/udev/rules.d/39-libimobiledevice.rules 
 		udevadm control --reload-rules
-		rm -f /usr/lib/libusb-1.0.so.0
-		rm -f /usr/lib/libudev.so.1
-		rm -f /usr/sbin/usbmuxd
+		rm -f /usr/local/sbin/usbmuxd
 		exit 0
 	;;
 	status)
 		### Check package alive.
-		if [ -h "/usr/sbin/usbmuxd" ]; then
+		if [ -h "/usr/local/sbin/usbmuxd" ]; then
 			exit 0
 		else
 			exit 1
